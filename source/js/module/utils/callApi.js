@@ -11,7 +11,7 @@ export const callApi = ({url, config, onRequest, onSuccess, onError}) => {
   }
   return getResult(url, config)
     .then(json => onSuccess(json))
-    .catch(error => onError(error))
+    .catch(error => onError(error.toString()))
 }
 
 export const getResult = (url, config) =>

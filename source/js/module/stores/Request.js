@@ -3,7 +3,8 @@ import BasicStore from './BasicStore'
 
 const Errors = ['TypeError: Cannot read property \'latitude\' of undefined',
   'TypeError: Cannot read property \'longitude\' of undefined',
-  'Error: Request failed with status code 404'
+  'Error: Request failed with status code 404',
+  'Error: Request failed with status code 403'
 ]
 
 export default class Request extends BasicStore {
@@ -18,7 +19,7 @@ export default class Request extends BasicStore {
 
   _onError(error) {
     const index = Errors.indexOf(error.toString())
-    this.error = index !== -1 ? 'Введите корректный город' : error
+    this.error = index !== -1 && index !== 3 ? 'Введите корректный город' : error
     this.isFetching = false
   }
 }

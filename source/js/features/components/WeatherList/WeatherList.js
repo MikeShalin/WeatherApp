@@ -10,15 +10,27 @@ const Img = styled.img`
   width: 30px
 `
 
+const Title = styled.span`
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+`
+
 const Container = styled.div`
-  display: flex
-  flex-direction: column
+  display: flex;
+  flex-direction: column;
+  width: 32vw;
+  font-size: 20px;
 `
 
 const Wrapper = styled.div`
-  display: flex
-  flex-direction: row
-  align-items: center
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+
+const Value = styled.span`
+  font-style: italic;
 `
 
 const convert = far => Math.round(((far - 32) / 1.8) * 100) / 100
@@ -34,17 +46,17 @@ const Weather = ({
                    pressure
                  }) =>
   <Container>
-    <span className='time'>{unixToTime(time)}</span>
+    <Title className='time'>{unixToTime(time)}</Title>
     <Wrapper>
       <span className='summary'>{summary}</span>
       <Img src={`icon/${summary.toLowerCase().replace(' ', '-')}.png`} className='icon' alt={summary.toLowerCase()}/>
     </Wrapper>
-    <span className='precipProbability'>облачность: {precipProbability}</span>
-    <span className='precipType'>тип осадков: {precipType}</span>
-    <span className='temperature'>температура: {convert(Number(temperature))} </span>
-    <span className='apparentTemperature'>ощущаемая температура: {convert(Number(apparentTemperature))} </span>
-    <span className='humidity'>влажность: {humidity} </span>
-    <span className='pressure'>давление: {pressure}  </span>
+    <span className='precipProbability'>облачность: <Value>{precipProbability}</Value></span>
+    <span className='precipType'>тип осадков: <Value>{precipType}</Value></span>
+    <span className='temperature'>температура: <Value>{convert(Number(temperature))} </Value></span>
+    <span className='apparentTemperature'>ощущаемая температура: <Value>{convert(Number(apparentTemperature))} </Value></span>
+    <span className='humidity'>влажность: <Value>{humidity} </Value></span>
+    <span className='pressure'>давление: <Value>{pressure}  </Value></span>
   </Container>
 
 const WeatherList = observer((props) =>

@@ -3,6 +3,11 @@ import {observable, action} from 'mobx'
 import {inject, observer} from 'mobx-react'
 import FormComponent from 'js/features/components/Form/Form'
 
+const fakeOption = {
+  isFetching: '...загрузка городов',
+  error: '...упс не получилось',
+}
+
 @inject('location')
 @inject('country')
 @inject('cityStore')
@@ -27,6 +32,8 @@ class Form extends Component {
     this.props.cityStore.addToStore(this.city)
   }
 
+  initOption = (test) => test ? fakeOption.isFetching : fakeOption.error
+
   componentWillMount() {
     this.props.country.countryListFetch()
   }
@@ -38,7 +45,9 @@ class Form extends Component {
       cityValue={(this.props.cityStore.currCity && this.props.cityStore.currCity[0].title) || this.city}
       countryValue={this.country}
       onChange={this.onChange}
-      optionList={(country.result && country.result.slice()) || []}
+      optionList={
+        (country.result && country.result.slice()) || [{name: this.initOption(country.isFetching) , code: ''}]
+      }
       error={location.error || country.error}
       isFetching={location.isFetching || country.isFetching}
       result={location.result || country.result}

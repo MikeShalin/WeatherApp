@@ -9,7 +9,7 @@ const ContainerApp = styled.div`
   width: 100vw;
   height: 100vh;
   background: grey;
-  padding: 30px;
+  padding: 30px 10px;
   display: flex;
 `
 
@@ -19,8 +19,8 @@ export class App extends Component {
     return (
       <ContainerApp>
         <Form/>
-        <CityList/>
         <WeatherList/>
+        <CityList/>
       </ContainerApp>
     )
   }

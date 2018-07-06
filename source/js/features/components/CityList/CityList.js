@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {observer} from 'mobx-react'
 
 const ContainerCityList = styled.div`
   width: 32vw;
@@ -79,4 +80,4 @@ const CityList = ({
   </ContainerCityList>
 
 
-export default CityList
+export default observer(CityList)

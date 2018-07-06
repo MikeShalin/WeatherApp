@@ -26,10 +26,10 @@ class Form extends Component {
   onSubmit = e => {
     e.preventDefault()
     this.props.location.getLocation({
-      city: this.city,
+      city: this.city || this.props.cityStore.currCity[0].title,
       country: this.country
     })
-    this.props.cityStore.addToStore(this.city)
+    this.props.cityStore.addToStore(this.city || this.props.cityStore.currCity[0].title)
   }
 
   initOption = (test) => test ? fakeOption.isFetching : fakeOption.error
@@ -42,7 +42,7 @@ class Form extends Component {
     const {location, country} = this.props
     return <FormComponent
       onSubmit={this.onSubmit}
-      cityValue={(this.props.cityStore.currCity && this.props.cityStore.currCity[0].title) || this.city}
+      cityValue={this.city || (this.props.cityStore.currCity && this.props.cityStore.currCity[0].title)}
       countryValue={this.country}
       onChange={this.onChange}
       optionList={
